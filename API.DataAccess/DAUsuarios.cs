@@ -11,6 +11,7 @@ namespace API.DataAccess
 {
     public class DAUsuarios
     {
+         
         public static List<BEUsuarioERP> ListarUsuariosERP()
         {
             var lista = new List<BEUsuarioERP>();
@@ -24,17 +25,19 @@ namespace API.DataAccess
 
             while (drlector.Read())
             {
-                BEUsuarioERP oCategoria = new BEUsuarioERP();
-                oCategoria.Id = Convert.ToInt32(drlector["Id"]);
-                oCategoria.Usuario = drlector["Usuario"].ToString().Trim(); 
-                lista.Add(oCategoria);
+                BEUsuarioERP oUsuarioERP = new BEUsuarioERP();
+                oUsuarioERP.Id = Convert.ToInt32(drlector["Id"]);
+                oUsuarioERP.Usuario = drlector["Usuario"].ToString().Trim(); 
+                lista.Add(oUsuarioERP);
             }
             return lista;
         }
 
-        public static List<BEUsuarioERP> ListarUsuariosMoodle()
+
+
+        public static List<BEUsuarioMoodle> ListarUsuariosMoodle()
         {
-            var lista = new List<BEUsuarioERP>();
+            var lista = new List<BEUsuarioMoodle>();
             string cadenaConexion = "Data Source=CHECO;DataBase=BDApi;Integrated Security=true";
             //string cadenaConexion = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SqlConnection cn = new SqlConnection(cadenaConexion);
@@ -45,10 +48,10 @@ namespace API.DataAccess
 
             while (drlector.Read())
             {
-                var oUsario = new BEUsuarioMoodle();
-                oUsario.Id = Convert.ToInt32(drlector["Id"]);
-                oUsario.Usuario = drlector["Usuario"].ToString().Trim();
-                lista.Add(oCategoria);
+                var oUsuarioMoodle = new BEUsuarioMoodle();
+                oUsuarioMoodle.Id = Convert.ToInt32(drlector["Id"]);
+                oUsuarioMoodle.Usuario = drlector["Usuario"].ToString().Trim();
+                lista.Add(oUsuarioMoodle);
             }
             return lista;
         }
