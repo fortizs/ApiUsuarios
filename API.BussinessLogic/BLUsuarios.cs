@@ -10,5 +10,16 @@ namespace API.BussinessLogic
         {
             return DAUsuarios.ListarUsuariosERP();
         }
+
+        public List<BEUsuarioERP> BuscarUsuarioRepetidos()
+        {
+            List<BEUsuarioERP> usuarioERP = new List<BEUsuarioERP>();
+            List<BEUsuarioMoodle> usuarioMoodle = new List<BEUsuarioMoodle>();
+
+            usuarioERP = DAUsuarios.ListarUsuariosERP();
+            usuarioMoodle = DAUsuarios.ListarUsuariosMoodle();
+
+            return DAUsuarios.ListarUsuariosERP();
+        }
     }
 }
