@@ -31,5 +31,26 @@ namespace API.DataAccess
             }
             return lista;
         }
+
+        public static List<BEUsuarioERP> ListarUsuariosMoodle()
+        {
+            var lista = new List<BEUsuarioERP>();
+            string cadenaConexion = "Data Source=CHECO;DataBase=BDApi;Integrated Security=true";
+            //string cadenaConexion = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("SpListarUsuariosMoodle", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader drlector = cmd.ExecuteReader();
+
+            while (drlector.Read())
+            {
+                var oUsario = new BEUsuarioMoodle();
+                oUsario.Id = Convert.ToInt32(drlector["Id"]);
+                oUsario.Usuario = drlector["Usuario"].ToString().Trim();
+                lista.Add(oCategoria);
+            }
+            return lista;
+        }
     }
 }
