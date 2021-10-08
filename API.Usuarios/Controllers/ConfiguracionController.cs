@@ -14,8 +14,8 @@ namespace API.Usuarios.Controllers
     public class ConfiguracionController : ControllerBase
     {
         //private MyDBContext myDbContext;
-        private ConfiguracionService service;
-        public ConfiguracionController(ConfiguracionService services)
+        private IConfiguracionService service;
+        public ConfiguracionController(IConfiguracionService services)
         {
             //myDbContext = context;
             service = services;

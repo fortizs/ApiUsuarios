@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Usuarios.Services
 {
-    public class ConfiguracionService 
+    public class ConfiguracionService : IConfiguracionService
     {
         private IConfigurationRepository repo;
 
