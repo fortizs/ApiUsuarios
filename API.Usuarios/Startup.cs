@@ -1,4 +1,4 @@
-using API.DataAccess;
+
 using API.Usuarios.Models;
 using API.Usuarios.Repository;
 using API.Usuarios.Repository.Implementation;
@@ -28,9 +28,15 @@ namespace API.Usuarios
         {             
             string mySqlConnectionStr = Configuration.GetConnectionString("MysqlConn");
             services.AddDbContextPool<MyDBContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
-           
+
+            //services.AddSingleton<IConfiguracionService, ConfiguracionService>();
+            services.AddScoped<IConfiguracionService, ConfiguracionService>();
+            services.AddScoped<IUsuarioCursoOracleService, UsuarioCursoOracleService>();
+            services.AddTransient<IConfigurationRepository, ConfiguracionRepository>();
+            services.AddTransient<IUsuarioCursoOracleRepository, UsuarioCursoOracleRepository>();
+
             services.AddControllers();
-            services.AddScoped<ConfiguracionService>();
+            
 
             services.AddSwaggerGen(c =>
             {

@@ -13,38 +13,30 @@ namespace API.Usuarios.Controllers
     [ApiController]
     public class ConfiguracionController : ControllerBase
     {
-        //private MyDBContext myDbContext;
+        
         private readonly IConfiguracionService service;
         public ConfiguracionController(IConfiguracionService services)
-        {
-            //myDbContext = context;
+        {            
             service = services;
-        }
-
-        //[HttpGet]
-        //public IEnumerable<Configuracion> GetConfiguracion()
-        //{
-        //    return service.GetConfiguracion();
-        //    //return (this.myDbContext.Configuraciones.ToList());
-        //}
+        }    
 
         [HttpGet]
         public async Task<ActionResult<List<Configuracion>>> GetConfiguracion()
         {
             return await service.GetAllConfiguracionAsync();
+        }     
+       
+        [HttpPost]
+        public async Task<ActionResult<Configuracion>> CreateConfiguracion(Configuracion configuracion)
+        {
+            return await service.AddConfiguracionAsync(configuracion);            
         }
 
-        //[HttpGet("getRecursos", Name = "GetRecursos")]
-        //public List<RecursosInfo> GetRecursos()
-        //{
-        //    return infoManager.getRecursos();
-        //}
-
-        //[HttpGet("GetByPeriodo", Name = "GetByPeriodo")]
-        //public IActionResult GetByPeriodo(string Periodo)
-        //{
-        //    return Ok(service.GetByPeriodo(Periodo));
-        //}
+        [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]
+        public IActionResult GetByPeriodo(string Periodo)
+        {
+            return Ok(service.GetConfiguracionByPeriodoAsync(Periodo));
+        }
 
     }
 }

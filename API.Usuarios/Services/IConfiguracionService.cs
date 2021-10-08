@@ -10,7 +10,9 @@ namespace API.Usuarios.Services
     {      
         Task<List<Configuracion>> GetAllConfiguracionAsync();
 
-        //Task<Configuracion> GetByPeriodo(String Periodo);
+        Task<Configuracion> AddConfiguracionAsync(Configuracion configuracion);
+
+        Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo);
     }
     
 }

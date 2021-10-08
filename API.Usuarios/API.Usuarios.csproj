@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API.BussinessLogic\API.BussinessLogic.csproj" />
-    <ProjectReference Include="..\API.Entity\API.Entity.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
 

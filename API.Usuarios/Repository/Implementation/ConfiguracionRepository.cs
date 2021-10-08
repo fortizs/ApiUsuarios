@@ -19,6 +19,12 @@ namespace API.Usuarios.Repository.Implementation
             return await GetAll().ToListAsync();
         }
 
+        public Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo)
+        {
+            return GetAll().FirstOrDefaultAsync(x => x.Periodo == periodo);
+        }
+
+
         //public IQueryable<Configuracion> GetAllCustomersAsync()
         //{
         //    try
@@ -42,7 +48,7 @@ namespace API.Usuarios.Repository.Implementation
         //        throw new Exception($"Couldn't retrieve entities: {ex.Message}");
         //    }
 
-           
+
         //}
 
 

@@ -20,6 +20,15 @@ namespace API.Usuarios.Services
         {
             return await repo.GetAllConfiguracionAsync();
         }
+        public async Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo)
+        {
+            return await repo.GetConfiguracionByPeriodoAsync(periodo);
+        }
+
+        public async Task<Configuracion> AddConfiguracionAsync(Configuracion configuracion)
+        {
+            return await repo.AddAsync(configuracion);
+        }
 
         //public IEnumerable<Configuracion> GetConfiguracion()
         //{

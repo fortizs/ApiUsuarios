@@ -9,6 +9,7 @@ namespace API.Usuarios.Repository
     public interface IConfigurationRepository : IRepository<Configuracion>
     {       
         Task<List<Configuracion>> GetAllConfiguracionAsync();
-        //Task<Configuracion> GetConfigurationByPeriodoAsync(string periodo);
+        Task<Configuracion> AddAsync(Configuracion entity);
+        Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo);        
     }
 }

@@ -12,12 +12,12 @@ namespace API.Usuarios.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        //private readonly IUsuarioCursoOracleService service;
+        private readonly IUsuarioCursoOracleService service;
         private MyDBContext myDbContext; 
-        public UsuariosController(MyDBContext context)
+        public UsuariosController(MyDBContext context, IUsuarioCursoOracleService service)
         {
             this.myDbContext = context;
-            //this.service = service;
+            this.service = service;
         }
 
         [HttpGet]
@@ -26,113 +26,113 @@ namespace API.Usuarios.Controllers
             return (this.myDbContext.UsuarioCursoOracles.ToList());
         }
 
-        [HttpGet("GetPrueba", Name = "GetPrueba")]
-        public IEnumerable<UsuarioCursoOracle> GetPrueba()
-        {
+        //[HttpGet("GetPrueba", Name = "GetPrueba")]
+        //public IEnumerable<UsuarioCursoOracle> GetPrueba()
+        //{
             
 
-            var configuracion = myDbContext.Configuraciones.Single(p=> p.Habilitar.Equals(true));
-            var periodo = "";
-            if (configuracion != null) {
-                periodo = configuracion.Periodo;
-            }
+        //    var configuracion = myDbContext.Configuraciones.Single(p=> p.Habilitar.Equals(true));
+        //    var periodo = "";
+        //    if (configuracion != null) {
+        //        periodo = configuracion.Periodo;
+        //    }
 
-            Console.Write("Periodo: " +periodo);
+        //    Console.Write("Periodo: " +periodo);
 
-            if (!periodo.Equals("")) {
+        //    if (!periodo.Equals("")) {
 
-                //Buscar si existe periodo en la migracion
-                List<Migracion> listaMigracion = new List<Migracion>();
-                var migraciones = myDbContext.Migraciones.Where(m => m.Periodo.Contains(periodo)).ToList();
-                if (migraciones.Count > 0)
-                {
-                    //Existen Migraciones - Debe filtrar por fecha y periodo
-                    var dateAndTime = DateTime.Now;
-                    var fechaActual = dateAndTime.Date.ToString("dd-MM-yyyy");
-                    var alumnosOracle = myDbContext.UsuarioCursoOracles.Where(o => o.Strm == periodo && o.Sysdate.ToString("dd-MM-yyyy") == fechaActual).ToList();
-                    var alumnosMoodle = myDbContext.UsuarioCursoMoodles.Where(o => o.Strm == periodo && o.Sysdate.ToString("dd-MM-yyyy") == fechaActual).ToList();
+        //        //Buscar si existe periodo en la migracion
+        //        List<Migracion> listaMigracion = new List<Migracion>();
+        //        var migraciones = myDbContext.Migraciones.Where(m => m.Periodo.Contains(periodo)).ToList();
+        //        if (migraciones.Count > 0)
+        //        {
+        //            //Existen Migraciones - Debe filtrar por fecha y periodo
+        //            var dateAndTime = DateTime.Now;
+        //            var fechaActual = dateAndTime.Date.ToString("dd-MM-yyyy");
+        //            var alumnosOracle = myDbContext.UsuarioCursoOracles.Where(o => o.Strm == periodo && o.Sysdate.ToString("dd-MM-yyyy") == fechaActual).ToList();
+        //            var alumnosMoodle = myDbContext.UsuarioCursoMoodles.Where(o => o.Strm == periodo && o.Sysdate.ToString("dd-MM-yyyy") == fechaActual).ToList();
 
-                    foreach (UsuarioCursoOracle usuarioOracle in alumnosOracle) {
-                        var oMigracion = new Migracion();
-                        var item = alumnosMoodle.Find(x => x.Emplid == usuarioOracle.Emplid);
-                        if (item != null) {
-                            oMigracion.TipoMigracion = "Agregar";
-                            oMigracion.Fecha = DateTime.Now;
-                            oMigracion.NroMigracion = 1;
-                            oMigracion.NroIntento = 1;
-                            oMigracion.Emplid = usuarioOracle.Emplid;
-                            oMigracion.Periodo = usuarioOracle.Strm;
-                            listaMigracion.Add(oMigracion);
-                        }
-                    }
+        //            foreach (UsuarioCursoOracle usuarioOracle in alumnosOracle) {
+        //                var oMigracion = new Migracion();
+        //                var item = alumnosMoodle.Find(x => x.Emplid == usuarioOracle.Emplid);
+        //                if (item != null) {
+        //                    oMigracion.TipoMigracion = "Agregar";
+        //                    oMigracion.Fecha = DateTime.Now;
+        //                    oMigracion.NroMigracion = 1;
+        //                    oMigracion.NroIntento = 1;
+        //                    oMigracion.Emplid = usuarioOracle.Emplid;
+        //                    oMigracion.Periodo = usuarioOracle.Strm;
+        //                    listaMigracion.Add(oMigracion);
+        //                }
+        //            }
 
-                    foreach (UsuarioCursoMoodle usuarioMoodle in alumnosMoodle)
-                    {
-                        var oMigracion = new Migracion();
-                        var item = alumnosOracle.Find(x => x.Emplid == usuarioMoodle.Emplid);
-                        if (item != null)
-                        {
-                            oMigracion.TipoMigracion = "Quitar";
-                            oMigracion.Fecha = DateTime.Now;
-                            oMigracion.NroMigracion = 1;
-                            oMigracion.NroIntento = 1;
-                            oMigracion.Emplid = usuarioMoodle.Emplid;
-                            oMigracion.Periodo = usuarioMoodle.Strm;
-                            listaMigracion.Add(oMigracion);
-                        }
-                    }
-                }
-                else {
-                    //No Existen Migraciones - Debe filtrar por periodo
-                    var alumnosOracle = myDbContext.UsuarioCursoOracles.Where(o => o.Strm == periodo).ToList();
-                    var alumnosMoodle = myDbContext.UsuarioCursoMoodles.Where(o => o.Strm == periodo).ToList();                    
+        //            foreach (UsuarioCursoMoodle usuarioMoodle in alumnosMoodle)
+        //            {
+        //                var oMigracion = new Migracion();
+        //                var item = alumnosOracle.Find(x => x.Emplid == usuarioMoodle.Emplid);
+        //                if (item != null)
+        //                {
+        //                    oMigracion.TipoMigracion = "Quitar";
+        //                    oMigracion.Fecha = DateTime.Now;
+        //                    oMigracion.NroMigracion = 1;
+        //                    oMigracion.NroIntento = 1;
+        //                    oMigracion.Emplid = usuarioMoodle.Emplid;
+        //                    oMigracion.Periodo = usuarioMoodle.Strm;
+        //                    listaMigracion.Add(oMigracion);
+        //                }
+        //            }
+        //        }
+        //        else {
+        //            //No Existen Migraciones - Debe filtrar por periodo
+        //            var alumnosOracle = myDbContext.UsuarioCursoOracles.Where(o => o.Strm == periodo).ToList();
+        //            var alumnosMoodle = myDbContext.UsuarioCursoMoodles.Where(o => o.Strm == periodo).ToList();                    
 
-                    foreach (UsuarioCursoOracle usuarioOracle in alumnosOracle)
-                    {
-                        var oMigracion = new Migracion();
-                        var item = alumnosMoodle.Find(x => x.Emplid == usuarioOracle.Emplid);
-                        if (item != null)
-                        {
-                            oMigracion.TipoMigracion = "Agregar";
-                            oMigracion.Fecha = DateTime.Now;
-                            oMigracion.NroMigracion = 1;
-                            oMigracion.NroIntento = 0;
-                            oMigracion.Emplid = usuarioOracle.Emplid;
-                            oMigracion.Periodo = usuarioOracle.Strm;
-                            listaMigracion.Add(oMigracion);
-                        }
-                    }
+        //            foreach (UsuarioCursoOracle usuarioOracle in alumnosOracle)
+        //            {
+        //                var oMigracion = new Migracion();
+        //                var item = alumnosMoodle.Find(x => x.Emplid == usuarioOracle.Emplid);
+        //                if (item != null)
+        //                {
+        //                    oMigracion.TipoMigracion = "Agregar";
+        //                    oMigracion.Fecha = DateTime.Now;
+        //                    oMigracion.NroMigracion = 1;
+        //                    oMigracion.NroIntento = 0;
+        //                    oMigracion.Emplid = usuarioOracle.Emplid;
+        //                    oMigracion.Periodo = usuarioOracle.Strm;
+        //                    listaMigracion.Add(oMigracion);
+        //                }
+        //            }
 
-                    foreach (UsuarioCursoMoodle usuarioMoodle in alumnosMoodle)
-                    {
-                        var oMigracion = new Migracion();
-                        var item = alumnosOracle.Find(x => x.Emplid == usuarioMoodle.Emplid);
-                        if (item != null)
-                        {
-                            oMigracion.TipoMigracion = "Quitar";
-                            oMigracion.Fecha = DateTime.Now;
-                            oMigracion.NroMigracion = 1;
-                            oMigracion.NroIntento = 0;
-                            oMigracion.Emplid = usuarioMoodle.Emplid;
-                            oMigracion.Periodo = usuarioMoodle.Strm;
-                            listaMigracion.Add(oMigracion);
-                        }
-                    }
+        //            foreach (UsuarioCursoMoodle usuarioMoodle in alumnosMoodle)
+        //            {
+        //                var oMigracion = new Migracion();
+        //                var item = alumnosOracle.Find(x => x.Emplid == usuarioMoodle.Emplid);
+        //                if (item != null)
+        //                {
+        //                    oMigracion.TipoMigracion = "Quitar";
+        //                    oMigracion.Fecha = DateTime.Now;
+        //                    oMigracion.NroMigracion = 1;
+        //                    oMigracion.NroIntento = 0;
+        //                    oMigracion.Emplid = usuarioMoodle.Emplid;
+        //                    oMigracion.Periodo = usuarioMoodle.Strm;
+        //                    listaMigracion.Add(oMigracion);
+        //                }
+        //            }
 
-                }
+        //        }
 
 
-                //Insertar en la Tabla Migracion
-                if (listaMigracion.Count > 0) {
-                    listaMigracion.ForEach(x => {
-                        myDbContext.Migraciones.Update(x);
-                    });
-                }
+        //        //Insertar en la Tabla Migracion
+        //        if (listaMigracion.Count > 0) {
+        //            listaMigracion.ForEach(x => {
+        //                myDbContext.Migraciones.Update(x);
+        //            });
+        //        }
 
-            }
+        //    }
 
-            return (this.myDbContext.UsuarioCursoOracles.ToList());
-        }
+        //    return (this.myDbContext.UsuarioCursoOracles.ToList());
+        //}
 
         public class RequestMigracion {
             public int Emplid { get; set; }
@@ -142,11 +142,11 @@ namespace API.Usuarios.Controllers
             public int nro_intento { get; set; }
         }
 
-        //[HttpGet("GetAllUsuarioCursoOracleAsync", Name = "GetAllUsuarioCursoOracleAsync")]
-        //public async Task<ActionResult<List<UsuarioCursoOracle>>> GetAllUsuarioCursoOracleAsync()
-        //{
-        //    return await service.GetAllUsuarioCursoOracleAsync();
-        //}
+        [HttpGet("GetAllUsuarioCursoOracleAsync", Name = "GetAllUsuarioCursoOracleAsync")]
+        public async Task<ActionResult<List<UsuarioCursoOracle>>> GetAllUsuarioCursoOracleAsync()
+        {
+            return await service.GetAllUsuarioCursoOracleAsync();
+        }
 
         //private readonly Conexion _dbContext;
         //public UsuariosController(Conexion dbContext)
