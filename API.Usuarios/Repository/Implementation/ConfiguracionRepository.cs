@@ -1,4 +1,5 @@
 ﻿using API.Usuarios.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,48 +7,79 @@ using System.Threading.Tasks;
 
 namespace API.Usuarios.Repository.Implementation
 {
-    public class ConfiguracionRepository : IConfigurationRepository,IDisposable
+    public class ConfiguracionRepository : Repository<Configuracion>, IConfigurationRepository
     {
-        private MyDBContext context;
 
-        public ConfiguracionRepository(MyDBContext context)
+        public ConfiguracionRepository(MyDBContext myDBContext) : base(myDBContext)
         {
-            this.context = context;
         }
 
-        public IEnumerable<Configuracion> GetConfiguracion()
+        public async Task<List<Configuracion>> GetAllConfiguracionAsync()
         {
-            return context.Configuraciones.ToList();
+            return await GetAll().ToListAsync();
         }
 
-        public Configuracion GetByPeriodo(string Periodo)
-        {
-            return context.Configuraciones.Find(Periodo);
-        }
+        //public IQueryable<Configuracion> GetAllCustomersAsync()
+        //{
+        //    try
+        //    {
+        //        return context.Set<Configuracion>();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Couldn't retrieve entities: {ex.Message}");
+        //    }
+        //}
+
+        //public async Task<List<Configuracion>> GetAllConfiguracionAsync()
+        //{
+        //    try
+        //    {
+        //        return context.Set<Configuracion>();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Couldn't retrieve entities: {ex.Message}");
+        //    }
+
+           
+        //}
 
 
-        #region IDisposable Support
-        private bool disposedValue = false;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
+        //public IEnumerable<Configuracion> GetConfiguracion()
+        //{
+        //    return context.Configuraciones.ToList();
+        //}
 
-                disposedValue = true;
-            }
-        }
+        //public Configuracion GetByPeriodo(string Periodo)
+        //{
+        //    return context.Configuraciones.Find(Periodo);
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+
+        //#region IDisposable Support
+        //private bool disposedValue = false;
+
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!disposedValue)
+        //    {
+        //        if (disposing)
+        //        {
+        //            context.Dispose();
+        //        }
+
+        //        disposedValue = true;
+        //    }
+        //}
+
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+        //#endregion
 
 
         //IEnumerable<Configuracion> GetConfiguracion();

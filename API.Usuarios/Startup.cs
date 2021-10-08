@@ -1,5 +1,8 @@
 using API.DataAccess;
 using API.Usuarios.Models;
+using API.Usuarios.Repository;
+using API.Usuarios.Repository.Implementation;
+using API.Usuarios.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +29,9 @@ namespace API.Usuarios
             string mySqlConnectionStr = Configuration.GetConnectionString("MysqlConn");
             services.AddDbContextPool<MyDBContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
            
-            services.AddControllers();            
+            services.AddControllers();
+            services.AddScoped<ConfiguracionService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.Usuarios", Version = "v1" });                

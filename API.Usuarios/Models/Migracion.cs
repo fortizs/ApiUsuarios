@@ -13,6 +13,9 @@ namespace API.Usuarios.Models
         public DateTime Fecha { get; set; }
         public int NroMigracion { get; set; }
         public int NroIntento { get; set; }
+        public int Emplid { get; set; }
+        public string Estado { get; set; }
+        public string Periodo { get; set; }
 
 
     }

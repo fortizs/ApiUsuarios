@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace API.Usuarios.Services
 {
     public interface IConfiguracionService
-    {
-        IEnumerable<Configuracion> GetConfiguracion();
-        Configuracion GetByPeriodo(string Periodo);
+    {      
+        Task<List<Configuracion>> GetAllConfiguracionAsync();
+
+        //Task<Configuracion> GetByPeriodo(String Periodo);
     }
+    
 }

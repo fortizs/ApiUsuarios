@@ -9,22 +9,27 @@ namespace API.Usuarios.Services
 {
     public class ConfiguracionService : IConfiguracionService
     {
-        private IConfigurationRepository repo;
+        private readonly IConfigurationRepository repo;        
 
         public ConfiguracionService(IConfigurationRepository repo)
         {
             this.repo = repo;
         }
 
-        public IEnumerable<Configuracion> GetConfiguracion()
+        public async Task<List<Configuracion>> GetAllConfiguracionAsync()
         {
-            return repo.GetConfiguracion();
+            return await repo.GetAllConfiguracionAsync();
         }
 
-        public Configuracion GetByPeriodo(string Periodo)
-        {
-            return repo.GetByPeriodo(Periodo);
-        }
+        //public IEnumerable<Configuracion> GetConfiguracion()
+        //{
+        //    return repo.GetConfiguracion();
+        //}
+
+        //public Configuracion GetByPeriodo(string Periodo)
+        //{
+        //    return repo.GetByPeriodo(Periodo);
+        //}
     }
 }
 

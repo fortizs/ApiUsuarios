@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Usuarios.Repository
-{
-    public interface IConfigurationRepository : IDisposable
-    {
-        IEnumerable<Configuracion> GetConfiguracion();
-        Configuracion GetByPeriodo(string Periodo);
+{    
+    public interface IConfigurationRepository : IRepository<Configuracion>
+    {       
+        Task<List<Configuracion>> GetAllConfiguracionAsync();
+        //Task<Configuracion> GetConfigurationByPeriodoAsync(string periodo);
     }
 }
