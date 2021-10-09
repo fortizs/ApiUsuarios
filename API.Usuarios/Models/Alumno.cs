@@ -8,7 +8,7 @@ namespace API.Usuarios.Models
     public class Alumno
     {
         public int IdAlumno { get; set; } 
-        public string Emplid { get; set; } 
+        public int Emplid { get; set; } 
         public string Nombre { get; set; } 
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; } 
