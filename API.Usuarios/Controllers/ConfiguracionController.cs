@@ -38,11 +38,18 @@ namespace API.Usuarios.Controllers
             return await service.UpdateConfiguracionAsync(configuracion);            
         }
 
-        [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]        
+
+        [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]
         public async Task<ActionResult<Configuracion>> GetByPeriodo(string Periodo)
         {
             //return Ok(service.GetConfiguracionByPeriodoAsync(Periodo));
             return await service.GetConfiguracionByPeriodoAsync(Periodo);
+        }
+
+        [HttpGet("GetById", Name = "GetById")]        
+        public async Task<ActionResult<Configuracion>> GetById(int id)
+        {            
+            return await service.GetConfiguracionById(id);
         }
 
         //[HttpPost, ActionName("Delete")]

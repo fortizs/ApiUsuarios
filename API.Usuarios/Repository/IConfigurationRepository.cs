@@ -10,6 +10,7 @@ namespace API.Usuarios.Repository
     {       
         Task<List<Configuracion>> GetAllConfiguracionAsync();
         Task<Configuracion> AddAsync(Configuracion entity);
-        Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo);        
+        Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo);
+        Task<Configuracion> GetConfiguracionById(int id);
     }
 }

@@ -35,18 +35,20 @@ namespace API.Usuarios.Services
             return await repo.UpdateAsync(configuracion);
         }
 
-        
+        public async Task<Configuracion> GetConfiguracionById(int id) {
+            return await repo.GetConfiguracionById(id);
+        }
 
             //public IEnumerable<Configuracion> GetConfiguracion()
             //{
             //    return repo.GetConfiguracion();
             //}
 
-            //public Configuracion GetByPeriodo(string Periodo)
-            //{
-            //    return repo.GetByPeriodo(Periodo);
-            //}
-        }
+        //public Configuracion GetByPeriodo(string Periodo)
+        //{
+        //    return repo.GetByPeriodo(Periodo);
+        //}
+    }
 }
 
  
