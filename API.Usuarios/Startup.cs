@@ -33,6 +33,7 @@ namespace API.Usuarios
             services.AddScoped<IConfiguracionService, ConfiguracionService>();
             services.AddScoped<IUsuarioCursoOracleService, UsuarioCursoOracleService>();
             services.AddScoped<IMigracionService, MigracionService>();
+            services.AddScoped<IPeriodoService, PeriodoService>();
             services.AddTransient<IConfigurationRepository, ConfiguracionRepository>();
             services.AddTransient<IUsuarioCursoOracleRepository, UsuarioCursoOracleRepository>();
             services.AddTransient<IMigracionRepository, MigracionRepository>();

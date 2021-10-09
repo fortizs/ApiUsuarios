@@ -117,7 +117,7 @@ namespace API.Usuarios.Models
 
             // ----------Alumno ------
             modelBuilder.Entity<Alumno>().Property(u => u.IdAlumno).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
-            modelBuilder.Entity<Alumno>().Property(u => u.Emplid).HasColumnType("varchar(200)").IsRequired(false);
+            modelBuilder.Entity<Alumno>().Property(u => u.Emplid).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Alumno>().Property(u => u.Nombre).HasColumnType("varchar(200)").IsRequired(false);
             modelBuilder.Entity<Alumno>().Property(u => u.ApellidoPaterno).HasColumnType("varchar(200)").IsRequired(false);
             modelBuilder.Entity<Alumno>().Property(u => u.ApellidoMaterno).HasColumnType("varchar(200)").IsRequired(false);
