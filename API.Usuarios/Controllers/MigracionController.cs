@@ -25,6 +25,12 @@ namespace API.Usuarios.Controllers
         [HttpPost]
         public ActionResult<List<Migracion>> IniciarMigracion()
         {
+            //Insertar 
+            Schedule calendario = new Schedule();
+            calendario.Fecha = DateTime.Now;
+            myDbContext.Schedules.Add(calendario);
+            myDbContext.SaveChanges();                      
+
             //Obtener Periodo Activo
 
             var configuracion = myDbContext.Configuraciones.Single(p => p.Habilitar.Equals(true));
@@ -131,6 +137,30 @@ namespace API.Usuarios.Controllers
                         migracionService.AddAsync(entity);
                     }
                 }
+
+                //Consumir API
+
+
+                //Respuesta del API
+                string respuesta = "OK";
+                
+                if (listaMigracion.Count > 0)
+                {
+                    foreach (var entity in listaMigracion)
+                    {
+                        
+                    }
+                }
+
+
+                //Log log = new Log();
+                //if (respuesta.Equals("OK")) {
+                    
+                //    log.IdMigracion .Fecha = DateTime.Now;
+                //    myDbContext.Schedules.Add(calendario);
+                //    myDbContext.SaveChanges();
+                //}
+                
 
             }           
 

@@ -9,6 +9,7 @@ namespace API.Usuarios.Models
     public class MyDBContext : DbContext
     {
         
+        public DbSet<Schedule> Schedules { get; set; } 
         public DbSet<Periodo> Periodos { get; set; } 
         public DbSet<Configuracion> Configuraciones { get; set; }
         public DbSet<Log> Logs { get; set; }
@@ -24,8 +25,9 @@ namespace API.Usuarios.Models
         //Creacion de tablas y mapeo de atributos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             // Map Entidades       
+            modelBuilder.Entity<Schedule>().ToTable("Schedule");
             modelBuilder.Entity<Periodo>().ToTable("Periodo");
             modelBuilder.Entity<Configuracion>().ToTable("Configuracion");
             modelBuilder.Entity<Log>().ToTable("Log");
@@ -35,6 +37,7 @@ namespace API.Usuarios.Models
             modelBuilder.Entity<Alumno>().ToTable("Alumno");
 
             // Configure Primary Keys   
+            modelBuilder.Entity<Schedule>().HasKey(u => u.IdSchedule).HasName("PK_IdSchedule");
             modelBuilder.Entity<Periodo>().HasKey(u => u.IdPeriodo).HasName("PK_IdPeriodo");
             modelBuilder.Entity<Configuracion>().HasKey(u => u.IdConfiguracion).HasName("PK_IdConfiguracion");
             modelBuilder.Entity<Log>().HasKey(u => u.IdLog).HasName("PK_IdLog");
@@ -47,6 +50,7 @@ namespace API.Usuarios.Models
             //modelBuilder.Entity<Prueba>().HasIndex(u => u.FirstName).HasDatabaseName("Idx_FirstName");
             //modelBuilder.Entity<Prueba>().HasIndex(u => u.LastName).HasDatabaseName("Idx_LastName");
 
+            modelBuilder.Entity<Schedule>().Property(u => u.IdSchedule).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
             modelBuilder.Entity<Periodo>().Property(u => u.IdPeriodo).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
             modelBuilder.Entity<Configuracion>().Property(u => u.IdConfiguracion).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
             modelBuilder.Entity<Log>().Property(u => u.IdLog).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
@@ -56,6 +60,11 @@ namespace API.Usuarios.Models
             modelBuilder.Entity<Alumno>().Property(u => u.IdAlumno).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
 
 
+            //AGregar Tipo de datos a tablas
+            // ----------- SCHEDULE- -------------            
+            modelBuilder.Entity<Schedule>().Property(u => u.Fecha).HasColumnType("datetime").IsRequired(true);            
+            //-----------------------------------
+            
             //AGregar Tipo de datos a tablas
             // ----------- PERIODO- -------------
             modelBuilder.Entity<Periodo>().Property(u => u.IdPeriodo).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
