@@ -26,7 +26,7 @@ namespace API.Usuarios.Services
         }
 
         public async Task<Configuracion> AddConfiguracionAsync(Configuracion configuracion)
-        {
+        {          
             return await repo.AddAsync(configuracion);
         }
         
@@ -38,6 +38,11 @@ namespace API.Usuarios.Services
         public async Task<Configuracion> GetConfiguracionById(int id) {
             return await repo.GetConfiguracionById(id);
         }
+        
+        public async Task<Configuracion> GetConfiguracionByHabilitar(bool habilitar) {
+            return await repo.GetConfiguracionByHabilitar(habilitar);
+        }
+
 
             //public IEnumerable<Configuracion> GetConfiguracion()
             //{

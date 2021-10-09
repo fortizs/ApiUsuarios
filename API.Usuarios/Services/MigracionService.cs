@@ -20,5 +20,10 @@ namespace API.Usuarios.Services
             return repo.GetByPeriodoAsync(periodo);
         }
 
+        public async Task<Migracion> AddAsync(Migracion entity)
+        {
+            return await repo.AddAsync(entity);
+        }
+
     }
 }
