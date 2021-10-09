@@ -31,12 +31,29 @@ namespace API.Usuarios.Controllers
         {
             return await service.AddConfiguracionAsync(configuracion);            
         }
-
-        [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]
-        public IActionResult GetByPeriodo(string Periodo)
+        
+        [HttpPut]
+        public async Task<ActionResult<Configuracion>> UpdateConfiguracion(Configuracion configuracion)
         {
-            return Ok(service.GetConfiguracionByPeriodoAsync(Periodo));
+            return await service.UpdateConfiguracionAsync(configuracion);            
         }
+
+        [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]        
+        public async Task<ActionResult<Configuracion>> GetByPeriodo(string Periodo)
+        {
+            //return Ok(service.GetConfiguracionByPeriodoAsync(Periodo));
+            return await service.GetConfiguracionByPeriodoAsync(Periodo);
+        }
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(int id)
+        //{
+        //    var movie = await _context.Movie.FindAsync(id);
+        //    _context.Movie.Remove(movie);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
     }
 }

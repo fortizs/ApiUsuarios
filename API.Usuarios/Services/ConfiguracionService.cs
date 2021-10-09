@@ -29,17 +29,24 @@ namespace API.Usuarios.Services
         {
             return await repo.AddAsync(configuracion);
         }
+        
+        public async Task<Configuracion> UpdateConfiguracionAsync(Configuracion configuracion)
+        {
+            return await repo.UpdateAsync(configuracion);
+        }
 
-        //public IEnumerable<Configuracion> GetConfiguracion()
-        //{
-        //    return repo.GetConfiguracion();
-        //}
+        
 
-        //public Configuracion GetByPeriodo(string Periodo)
-        //{
-        //    return repo.GetByPeriodo(Periodo);
-        //}
-    }
+            //public IEnumerable<Configuracion> GetConfiguracion()
+            //{
+            //    return repo.GetConfiguracion();
+            //}
+
+            //public Configuracion GetByPeriodo(string Periodo)
+            //{
+            //    return repo.GetByPeriodo(Periodo);
+            //}
+        }
 }
 
  

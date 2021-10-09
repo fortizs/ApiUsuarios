@@ -19,10 +19,18 @@ namespace API.Usuarios.Repository.Implementation
             return await GetAll().ToListAsync();
         }
 
-        public Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo)
+        public async Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo)
         {
-            return GetAll().FirstOrDefaultAsync(x => x.Periodo == periodo);
+            return await GetAll().FirstOrDefaultAsync(x => x.Periodo == periodo);
         }
+
+        //public async Task<Configuracion> DeleteConfirmed(int id)
+        //{
+
+        //    var movie = await  Async(id);
+        //    _context.Movie.Remove(movie);
+        //    await _context.SaveChangesAsync();
+        //}
 
 
         //public IQueryable<Configuracion> GetAllCustomersAsync()
@@ -51,45 +59,6 @@ namespace API.Usuarios.Repository.Implementation
 
         //}
 
-
-
-        //public IEnumerable<Configuracion> GetConfiguracion()
-        //{
-        //    return context.Configuraciones.ToList();
-        //}
-
-        //public Configuracion GetByPeriodo(string Periodo)
-        //{
-        //    return context.Configuraciones.Find(Periodo);
-        //}
-
-
-        //#region IDisposable Support
-        //private bool disposedValue = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposedValue)
-        //    {
-        //        if (disposing)
-        //        {
-        //            context.Dispose();
-        //        }
-
-        //        disposedValue = true;
-        //    }
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-        //#endregion
-
-
-        //IEnumerable<Configuracion> GetConfiguracion();
-        //Configuracion GetByPeriodo(string Periodo);
     }
 }
 
