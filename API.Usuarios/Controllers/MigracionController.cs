@@ -20,16 +20,16 @@ namespace API.Usuarios.Controllers
             migracionService = migracion;
         }
 
-        [HttpGet]
-        public ActionResult<List<Migracion>> GetConfiguracion()
-        {
-            //Obtener Periodo Activo
+        //[HttpGet]
+        //public ActionResult<List<Migracion>> GetConfiguracion()
+        //{
+        //    //Obtener Periodo Activo
 
-            //Buscar si existe Data por Periodo - No es necesario traer toda la data.
-            List<Migracion> listaMigracion
+        //    //Buscar si existe Data por Periodo - No es necesario traer toda la data.
+        //    List<Migracion> listaMigracion
 
-            return  service.GetAllConfiguracionAsync();
-        }
+        //    return  service.GetAllConfiguracionAsync();
+        //}
 
     }
 }

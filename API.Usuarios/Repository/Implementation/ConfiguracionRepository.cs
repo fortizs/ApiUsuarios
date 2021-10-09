@@ -23,6 +23,10 @@ namespace API.Usuarios.Repository.Implementation
         {
             return await GetAll().FirstOrDefaultAsync(x => x.Periodo == periodo);
         }
+        public async Task<Configuracion> GetConfiguracionById(int id)
+        {
+            return await GetAll().FirstOrDefaultAsync(x => x.IdConfiguracion == id);
+        }
 
         //public async Task<Configuracion> DeleteConfirmed(int id)
         //{
