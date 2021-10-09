@@ -26,7 +26,7 @@ namespace API.Usuarios
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {             
-            string mySqlConnectionStr = Configuration.GetConnectionString("MysqlConn");
+            string mySqlConnectionStr = Configuration.GetConnectionString("MyslConnFO");
             services.AddDbContextPool<MyDBContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
             //services.AddSingleton<IConfiguracionService, ConfiguracionService>();
