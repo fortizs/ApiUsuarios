@@ -65,7 +65,7 @@ namespace API.Usuarios.Repository
             {
                 throw new Exception($"{nameof(entity)} could not be updated: {ex.Message}");
             }
-        }
+        }       
 
     }
 }

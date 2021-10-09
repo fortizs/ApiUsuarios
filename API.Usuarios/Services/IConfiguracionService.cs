@@ -17,6 +17,7 @@ namespace API.Usuarios.Services
         Task<Configuracion> UpdateConfiguracionAsync(Configuracion configuracion);
         
         Task<Configuracion> GetConfiguracionById(int id);
+        Task<Configuracion> GetConfiguracionByHabilitar(bool habilitar);
     }
     
 }

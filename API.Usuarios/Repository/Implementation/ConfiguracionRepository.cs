@@ -27,14 +27,14 @@ namespace API.Usuarios.Repository.Implementation
         {
             return await GetAll().FirstOrDefaultAsync(x => x.IdConfiguracion == id);
         }
+        public async Task<Configuracion> GetConfiguracionByHabilitar(bool habilitar)
+        {
+            return await GetAll().FirstOrDefaultAsync(x => x.Habilitar == habilitar);
+        }
 
-        //public async Task<Configuracion> DeleteConfirmed(int id)
-        //{
 
-        //    var movie = await  Async(id);
-        //    _context.Movie.Remove(movie);
-        //    await _context.SaveChangesAsync();
-        //}
+
+        
 
 
         //public IQueryable<Configuracion> GetAllCustomersAsync()

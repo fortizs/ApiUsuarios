@@ -15,9 +15,11 @@ namespace API.Usuarios.Controllers
     {
         
         private readonly IConfiguracionService service;
-        public ConfiguracionController(IConfiguracionService services)
+        private MyDBContext context;
+        public ConfiguracionController(IConfiguracionService services, MyDBContext _context)
         {            
             service = services;
+            context = _context;
         }    
 
         [HttpGet]
@@ -38,7 +40,6 @@ namespace API.Usuarios.Controllers
             return await service.UpdateConfiguracionAsync(configuracion);            
         }
 
-
         [HttpGet("GetByPeriodo", Name = "GetByPeriodo")]
         public async Task<ActionResult<Configuracion>> GetByPeriodo(string Periodo)
         {
@@ -51,16 +52,28 @@ namespace API.Usuarios.Controllers
         {            
             return await service.GetConfiguracionById(id);
         }
+        
+        [HttpGet("GetByHabilitar", Name = "GetByHabilitar")]        
+        public async Task<ActionResult<Configuracion>> GetByHabilitar(bool habilitar)
+        {            
+            return await service.GetConfiguracionByHabilitar(habilitar);
+        }
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    var movie = await _context.Movie.FindAsync(id);
-        //    _context.Movie.Remove(movie);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpDelete]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            var config = await context.Configuraciones.FindAsync(id);
+            if (config != null)
+            {
+                context.Configuraciones.Remove(config);
+                await context.SaveChangesAsync();
+                return Ok("Ok");
+            }
+            else {
+                return NotFound();
+            }
+            
+        }        
 
     }
 }

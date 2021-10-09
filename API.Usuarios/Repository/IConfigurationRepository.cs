@@ -12,5 +12,6 @@ namespace API.Usuarios.Repository
         Task<Configuracion> AddAsync(Configuracion entity);
         Task<Configuracion> GetConfiguracionByPeriodoAsync(string periodo);
         Task<Configuracion> GetConfiguracionById(int id);
+        Task<Configuracion> GetConfiguracionByHabilitar(bool habilitar);
     }
 }

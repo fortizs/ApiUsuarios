@@ -4,14 +4,16 @@ using API.Usuarios.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Usuarios.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211009054746_UpdateField")]
+    partial class UpdateField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,7 @@ namespace API.Usuarios.Migrations
                     b.Property<bool>("Habilitar")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("IdCategoria")
+                    b.Property<int>("IdPeriodo")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
